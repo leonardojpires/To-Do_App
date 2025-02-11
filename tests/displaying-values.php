@@ -2,7 +2,7 @@
 
 include '../includes/db.php'; // Include database connection
 
-// Display rows
+# Display rows
 
 // SQL query to fetch all tasks from the 'tasks' table
  $sql_query = "SELECT id, task_name, is_completed, created_at FROM tasks";

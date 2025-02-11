@@ -20,7 +20,7 @@ $conn = new mysqli(
 if ($conn->connect_error) {
 
     // Log the connection error for troubleshooting
-    error_log(message: 'Connection failed: '. $conn->connect_error);~
+    error_log(message: 'Connection failed: '. $conn->connect_error);
 
     // Terminate the script and display a user-friendly error message
     die('Something went wrong. Please try again later.');

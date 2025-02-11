@@ -1,6 +1,7 @@
 <?php
 
- // Inserting values
+ # Inserting values
+ 
  include '../includes/db.php'; // Include database connection
 
  // Generate a random number (0 or 1) for the 'is_completed' column
