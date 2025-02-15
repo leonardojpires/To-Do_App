@@ -22,34 +22,38 @@ include 'includes/db.php'; // Include database connection
             <input type="text" name="task_name" id="itask_name" placeholder="Insert your task name" required>
             <br>
             <br>
-            <label for="task_class"></label>
-            <input type="checkbox" name="task_class" id="itask_class" required>
+            <label for="task_class">Is Completed?</label>
+            <input type="checkbox" name="task_class" id="itask_class" value="1">
             <input type="submit" value="Add task">
         </form>
         <hr>
         <h2>Tasks:</h2>
         <div class="tasks">
-        <?php 
-            $result = $conn->query(query: 'SELECT * FROM tasks ORDER BY created_at DESC');
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $task_name = htmlspecialchars($row['task_name']);
-                    $task_class = $row['is_completed'] ? "completed" : "";
-                    $created_at = date("d M, Y H:i", strtotime($row['created_at'])) ;
+            <?php 
+                $result = $conn->query(query: "SELECT * FROM tasks ORDER BY created_at DESC");
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $task_name = htmlspecialchars($row["task_name"]);
+                        $task_class = $row["is_completed"] ? "completed" : "";
+                        $created_at = date("d M, Y H:i", strtotime($row["created_at"])) ;
+                        $checked = $row["is_completed"] ? "checked" : "";
 
-                    echo "
-                        <div class='task'>
-                            <input type='checkbox'>
-                            <span class='$task_class'>$task_name</span>
-                            <small>$created_at</small>
-                            <button class='del_button'>❌</button>
-                        </div>
-                    ";
+                        echo "
+                            <div class='task'>
+                                <input type='checkbox' $checked>
+                                <span class='$task_class'>$task_name</span>
+                                <small>$created_at</small>
+                                <form action='delete.php' method='POST'>
+                                    <input type='hidden' name='task_id' value='" . $row['id'] . "'>
+                                    <button class='del_button' name='delete' type='submit'>❌</button>
+                                </form>
+                            </div>
+                        ";
+                    }
                 }
-            }
-            else {
-                echo "No tasks found";
-            }
+                else {
+                    echo "No tasks found";
+                }
             ?>
         </div>
     </div>
