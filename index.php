@@ -1,7 +1,7 @@
 <?php 
-
+{}
 include 'includes/db.php'; // Include database connection
- 
+
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,12 @@ include 'includes/db.php'; // Include database connection
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do App</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -38,19 +44,19 @@ include 'includes/db.php'; // Include database connection
                         $created_at = date("d M, Y H:i", strtotime($row["created_at"])) ;
                         $checked = $row["is_completed"] ? "checked" : "";
 
-                        echo "
-                            <div class='task'>
-                                <input type='checkbox' $checked>
-                                <span class='$task_class'>$task_name</span>
-                                <small>$created_at</small>
-                                <form action='delete.php' method='POST'>
-                                    <input type='hidden' name='task_id' value='" . $row['id'] . "'>
-                                    <button class='del_button' name='delete' type='submit'>❌</button>
-                                </form>
-                            </div>
-                        ";
-                    }
-                }
+                            echo "
+                                <div class='task'>
+                                    <input type='checkbox' onclick=\"location.href='task_completed.php?task_id=" . $row['id'] . "'\" $checked>
+                                    <span class='$task_class'>$task_name</span>
+                                    <small>$created_at</small>
+                                    <form action='delete.php' method='POST'>
+                                        <input type='hidden' name='task_id' value='" . $row['id'] . "'>
+                                        <button class='del_button' name='delete' type='submit'>❌</button>
+                                    </form>
+                                </div>
+                            ";
+                        }
+                }   
                 else {
                     echo "No tasks found";
                 }
