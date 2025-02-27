@@ -13,9 +13,10 @@ include 'includes/db.php'; // Include database connection
     <style>
         .completed {
             text-decoration: line-through;
-            color: gray;
+            color:rgba(0, 0, 0, 0.77);
         }
     </style>
+    <script src="js/edit_task_name.js"></script>
 </head>
 <body>
     <div class="container">
@@ -35,6 +36,7 @@ include 'includes/db.php'; // Include database connection
         <hr>
         <h2>Tasks:</h2>
         <div class="tasks">
+            
             <?php 
                 $result = $conn->query(query: "SELECT * FROM tasks ORDER BY created_at DESC");
                 if ($result->num_rows > 0) {
@@ -43,20 +45,29 @@ include 'includes/db.php'; // Include database connection
                         $task_class = $row["is_completed"] ? "completed" : "";
                         $created_at = date("d M, Y H:i", strtotime($row["created_at"])) ;
                         $checked = $row["is_completed"] ? "checked" : "";
-
+                        
                             echo "
                                 <div class='task'>
                                     <input type='checkbox' onclick=\"location.href='task_completed.php?task_id=" . $row['id'] . "'\" $checked>
-                                    <span class='$task_class'>$task_name</span>
+                                    
+                                    <span class='$task_class' id='task_name-" . $row['id'] . "'>$task_name</span>
+                                    <input type='text' id='task_edit-" . $row['id'] . "' value=$task_name style='display: none'>
+                                    
                                     <small>$created_at</small>
-                                    <form action='delete.php' method='POST'>
-                                        <input type='hidden' name='task_id' value='" . $row['id'] . "'>
-                                        <button class='del_button' name='delete' type='submit'>❌</button>
-                                    </form>
+
+                                    <div>
+                                        <form action='delete.php' method='POST'>
+                                            <input type='hidden' name='task_id' value='" . $row['id'] . "'>
+                                            <button class='del_button' name='delete' type='submit'>❌</button>
+                                        </form>
+                                        <button class='del_button' id='task-" . $row['id'] . "-button' name='delete' onclick='enableEdit(" . $row['id'] . ")'>✏️</button>
+                                        <button id='task-" . $row['id'] . "-button' name='delete' onclick='saveEdit(" . $row['id'] . ")' style='display: none'>Save</button>
+                                    </div>
+
                                 </div>
                             ";
                         }
-                }   
+                }       
                 else {
                     echo "No tasks found";
                 }
