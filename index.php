@@ -49,7 +49,6 @@ include 'includes/db.php'; // Include database connection
                             echo "
                                 <div class='task'>
                                     <input type='checkbox' onclick=\"location.href='task_completed.php?task_id=" . $row['id'] . "'\" $checked>
-                                    
                                     <span class='$task_class' id='task_name-" . $row['id'] . "'>$task_name</span>
                                     <input type='text' id='task_edit-" . $row['id'] . "' value=$task_name style='display: none'>
                                     

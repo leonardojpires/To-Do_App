@@ -155,6 +155,6 @@ function saveEdit(taskId) {
 
 /* -- IMPORTANT NOTE --
 
-    I could have chosen for an async/await solution using try/catch. This solution would have made the code even cleaner, but I stuck with the fetch option for a sake of learning
+    I could have opted for an async/await solution using try/catch. This solution would have made the code even cleaner, but I stuck with the fetch option for a sake of learning
 
 */

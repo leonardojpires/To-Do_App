@@ -28,7 +28,7 @@ if (isset($_GET["task_id"])) {
 
     /* STEP 2: Toggle the 'is_completed' status 
         * If the task exists, it changes its status
-        * If 'is_completed' is 1 (completed), set it to 0 (not completed)
+        * If 'is_completed' is 1 (completed), set it to 0 (not completed)   
         * If 'is_completed' is 0 (not completed), set it to 1 (completed)
     */
 
