@@ -48,7 +48,7 @@ if (isset($_GET["task_id"])) {
     }
 
     // Redirect the user to the main page (index.php)
-    header(header: "Location: index.php");
+    // header(header: "Location: index.php");
 
     // Exit the script to ensure no further code is executed
     exit();
