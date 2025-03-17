@@ -1,5 +1,5 @@
 <?php 
-{}
+
 include 'includes/db.php'; // Include database connection
 
 ?>
@@ -17,6 +17,7 @@ include 'includes/db.php'; // Include database connection
         }
     </style>
     <script src="js/edit_task_name.js"></script>
+    <script src="js/mark_task.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,9 +49,9 @@ include 'includes/db.php'; // Include database connection
                         
                             echo "
                                 <div class='task'>
-                                    <input type='checkbox' onclick=\"location.href='task_completed.php?task_id=" . $row['id'] . "'\" $checked>
+                                    <input type='checkbox' id='task_completed-" . $row['id'] . "' onclick='completeTask(" . $row['id'] . ")' $checked>
                                     <span class='$task_class' id='task_name-" . $row['id'] . "'>$task_name</span>
-                                    <input type='text' id='task_edit-" . $row['id'] . "' value=$task_name style='display: none'>
+                                    <input type='text' id='task_edit-" . $row['id'] . "' value=\"" . htmlspecialchars($task_name) . "\"  style='display: none'>
                                     
                                     <small>$created_at</small>
 
@@ -62,7 +63,6 @@ include 'includes/db.php'; // Include database connection
                                         <button class='del_button' id='task-" . $row['id'] . "-button' name='delete' onclick='enableEdit(" . $row['id'] . ")'>✏️</button>
                                         <button id='task-" . $row['id'] . "-button' name='delete' onclick='saveEdit(" . $row['id'] . ")' style='display: none'>Save</button>
                                     </div>
-
                                 </div>
                             ";
                         }
