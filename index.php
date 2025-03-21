@@ -47,24 +47,8 @@ include 'includes/db.php'; // Include database connection
                         $created_at = date("d M, Y H:i", strtotime($row["created_at"])) ;
                         $checked = $row["is_completed"] ? "checked" : "";
                         
-                            echo "
-                                <div class='task'>
-                                    <input type='checkbox' id='task_completed-" . $row['id'] . "' onclick='completeTask(" . $row['id'] . ")' $checked>
-                                    <span class='$task_class' id='task_name-" . $row['id'] . "'>$task_name</span>
-                                    <input type='text' id='task_edit-" . $row['id'] . "' value=\"" . htmlspecialchars($task_name) . "\"  style='display: none'>
-                                    
-                                    <small>$created_at</small>
+                        include 'includes/task_item.php';
 
-                                    <div>
-                                        <form action='delete.php' method='POST'>
-                                            <input type='hidden' name='task_id' value='" . $row['id'] . "'>
-                                            <button class='del_button' name='delete' type='submit'>❌</button>
-                                        </form>
-                                        <button class='del_button' id='task-" . $row['id'] . "-button' name='delete' onclick='enableEdit(" . $row['id'] . ")'>✏️</button>
-                                        <button id='task-" . $row['id'] . "-button' name='delete' onclick='saveEdit(" . $row['id'] . ")' style='display: none'>Save</button>
-                                    </div>
-                                </div>
-                            ";
                         }
                 }       
                 else {
