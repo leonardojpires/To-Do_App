@@ -1,12 +1,14 @@
 function enableEdit(taskId) {
     // Hide the task name and show the input field
-    document.getElementById("task_name-" + taskId).style.display = "none";
+    document.querySelector("[data-task-name='" + taskId + "']").style.display = "none";
     document.getElementById("task_edit-" + taskId).style.display = "inline-block";
 
     // Show the Save button and hide the Edit button
-    let buttons = document.querySelectorAll("#task-" + taskId + "-button" );
-    buttons[0].style.display = "none";
-    buttons[1].style.display = "inline-block";
+    let editButton = document.querySelector(".edit_button[data-task-id='" + taskId + "']");
+    let saveButton = document.querySelector(".save_button[data-task-id='" + taskId + "']");
+
+    editButton.style.display = "none";
+    saveButton.style.display = "inline-block";
 }
 
 // --------------- AJAX BELOW --------------- // 
@@ -97,6 +99,8 @@ function enableEdit(taskId) {
 function saveEdit(taskId) {
     // Get the new task name from the input field
     let newName = document.getElementById("task_edit-" + taskId).value;
+    let name = document.querySelector("[data-task-name='" + taskId + "']");
+    let edit = document.getElementById("task_edit-" + taskId);
 
     /* Send an asynchronous HTTP request to update the task name on the server
     
@@ -129,18 +133,20 @@ function saveEdit(taskId) {
     })
     .then(() => {
         // Update the task name on the webpage
-        document.getElementById("task_name-" + taskId).textContent = newName;
+        name.textContent = newName;
 
         // Ensure the task name is visible (in case it was hidden during editing)
-        document.getElementById("task_name-" + taskId).style.display = "inline-block";
+        name.style.display = "inline-block";
 
         // Hide the editing input field since the name has been updated
-        document.getElementById("task_edit-" + taskId).style.display = "none";
+        edit.style.display = "none";
 
         // Update the visibility of buttons related to the task
-        let buttons = document.querySelectorAll("#task-" + taskId + "-button" );
-        buttons[0].style.display = "inline-block";
-        buttons[1].style.display = "none";
+        let editButton = document.querySelector(".edit_button[data-task-id='" + taskId + "']");
+        let saveButton = document.querySelector(".save_button[data-task-id='" + taskId + "']");
+    
+        editButton.style.display = "inline-block";
+        saveButton.style.display = "none";
     })
     .catch(error => {
 

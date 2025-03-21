@@ -3,7 +3,7 @@
 // Define database connection parameters
 $host = 'localhost'; // The hostname or IP address of MySQL server
 $user = 'root'; // The username to access the MySQL database
-$password = ''; // The password associated with the MySQL username
+$password = 'root'; // The password associated with the MySQL username
 $database = 'todo_app'; // The name of the database to connect to
 
 // Create a new MySQLi (MySQL Improved) connection object using the parameters defined above

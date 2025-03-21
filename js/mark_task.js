@@ -1,7 +1,7 @@
 function completeTask(taskId) {
     // console.log("Checkbox clicado! Task ID: " + taskId);
-    let checkbox = document.getElementById("task_completed-" + taskId).checked;
-    let taskName = document.getElementById("task_name-" + taskId);
+    let checkbox = document.querySelector("[data-task-id='" + taskId + "']").checked;
+    let taskName = document.querySelector("[data-task-name='" + taskId + "']");
 
     fetch("task_completed.php?task_id=" + taskId, {
         method: "GET"
@@ -17,5 +17,5 @@ function completeTask(taskId) {
         else {
             taskName.classList.remove("completed");
         }
-    }).catch(error => alert("Error"));
+    }).catch(error => alert("Error: " + error));
 }
