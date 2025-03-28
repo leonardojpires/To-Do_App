@@ -16,6 +16,7 @@ function completeTask(taskId) {
         }
         else {
             taskName.classList.remove("completed");
+
         }
     }).catch(error => alert("Error: " + error));
 }
