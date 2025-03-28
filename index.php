@@ -9,53 +9,54 @@ include 'includes/db.php'; // Include database connection
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
-    <style>
-        .completed {
-            text-decoration: line-through;
-            color:rgba(0, 0, 0, 0.77);
-        }
-    </style>
+    <title>Toolist</title>
+    <link rel="stylesheet" href="css/styles.css">
     <script src="js/edit_task_name.js"></script>
     <script src="js/mark_task.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>To-Do List</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos explicabo quisquam in atque nulla unde recusandae, odio eligendi laborum nostrum, aut cum! Voluptate dolorem inventore impedit nulla? Sunt, veritatis in.</p>
-        <hr>
-        <h2>Insert your tasks</h2>
-        <form method="POST" action="add.php">
-            <label for="task_name">Task name</label> <br>
-            <input type="text" name="task_name" id="itask_name" placeholder="Insert your task name" required>
-            <br>
-            <br>
-            <label for="task_class">Is Completed?</label>
-            <input type="checkbox" name="task_class" id="itask_class" value="1">
-            <input type="submit" value="Add task">
-        </form>
-        <hr>
-        <h2>Tasks:</h2>
-        <div class="tasks">
-            
-            <?php 
-                $result = $conn->query(query: "SELECT * FROM tasks ORDER BY created_at DESC");
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $task_name = htmlspecialchars($row["task_name"]);
-                        $task_class = $row["is_completed"] ? "completed" : "";
-                        $created_at = date("d M, Y H:i", strtotime($row["created_at"])) ;
-                        $checked = $row["is_completed"] ? "checked" : "";
-                        
-                        include 'includes/task_item.php';
+    <header class="container">
+        <h1>Toolist</h1>
+        <p>This project was created using: <strong>JavaScript</strong>, <strong>PHP</strong> and <strong>MySQL</strong> </p>
+    </header>
 
-                        }
-                }       
-                else {
-                    echo "No tasks found";
-                }
-            ?>
-        </div>
-    </div>
+    <main class="container">
+        <section class="add_task">
+            <h2>Insert your tasks</h2>
+            <form method="POST" action="add.php">
+                <label for="task_name">Task name</label>
+                <input type="text" name="task_name" id="itask_name" placeholder="Insert your task name" required>
+                <div class="is_completed_input">
+                    <input type="checkbox" name="task_class" class="task_class" id="itask_class" value="1">
+                    <label class="task_class_label" for="itask_class">Is the task already completed?</label>
+                </div>
+                <input type="submit" value="&#43;">
+            </form>
+            <hr>
+        </section>
+        <hr>
+        <section class="tasks">
+        <h2>Tasks:</h2>
+        <?php 
+        $result = $conn->query(query: "SELECT * FROM tasks ORDER BY created_at DESC");
+        if ($result->num_rows > 0): ?>
+            <table>
+                <thead>
+                    <th>Task</th>
+                    <th>Created at</th>
+                    <th>Is completed?</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <?php 
+                        include 'includes/tasks.php';
+                    ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No tasks found</p>
+        <?php endif; ?>
+        </section>
+    </main>
 </body>
 </html>

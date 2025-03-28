@@ -1,59 +1,76 @@
-<div class='task'>
+<tbody>
+    <div class='task'>
+        <!-- Task: Checkbox (task completed), Name, Edit Name  -->
+        <tr>
+            <td>
 
-    <!-- Task: Checkbox (task completed), Name, Edit Name  -->
+                <!-- In the original "index.php" code, the ID attribute was unique for each task, since it was being generated dynamically throigh a while loop. However, when the task item is moved to a separate template ("task_item.php") -->
+                <span
+                    for="task-name-<?= $row['id'] ?>"
+                    class="<?= $task_class ?>"
+                    data-task-name='<?= $row['id'] ?>'>
+                    <?= htmlspecialchars($task_name)?>
+                </span>
+                <input
+                    type='text'
+                    class="edit_input"
+                    id='task_edit-<?= $row['id'] ?>'
+                    value="<?= htmlspecialchars($task_name)?>"
+                    style='display: none'>
 
-    <input 
-        type='checkbox'
-        id="task-name-<?= $row['id'] ?>"
-        data-task-id='<?= $row['id'] ?>' 
-        onclick='completeTask(<?= $row['id'] ?>)' 
-        <?= $checked ?>>
-        <!-- In the original "index.php" code, the ID attribute was unique for each task, since it was being generated dynamically throigh a while loop. However, when the task item is moved to a separate template ("task_item.php") -->
-    <label
-        for="task-name-<?= $row['id'] ?>"
-        class="<?= $task_class ?>" 
-        data-task-name='<?= $row['id'] ?>'> 
-        <?= htmlspecialchars($task_name)?>
-    </label>
+            </td>
 
-    <input 
-        type='text' 
-        id='task_edit-<?= $row['id'] ?>' 
-        value="<?= htmlspecialchars($task_name)?>" 
-        style='display: none'>
-    
-    <small> <?= $created_at ?> </small>
+            <td>
 
-    <!-- Buttons: Delete, Edit and Save Edit -->
+                <small> <?= $created_at ?> </small>
 
-    <div>
-        <form action='delete.php' method='POST'>
-            <input 
-                type='hidden' 
-                name='task_id' 
-                value='<?= $row['id'] ?>'>
+            </td>
+            <td>
 
-            <button 
-                class='del_button' 
-                name='delete' 
-                type='submit'>
-                ❌
-            </button>
-        </form>
+                <div class="is_completed_input">
+                    <input
+                        type='checkbox'
+                        class="task_class"
+                        id="task-name-<?= $row['id'] ?>"
+                        data-task-id='<?= $row['id'] ?>'
+                        onclick='completeTask(<?= $row['id'] ?>)'
+                    <?= $checked ?>>
+                    <label class="task_name_class" for="task-name-<?= $row['id'] ?>"></label>
+                </div>
 
-            <button 
-                class='edit_button' 
-                data-task-id='<?= $row['id'] ?>' 
-                name='delete' 
-                onclick='enableEdit(<?= $row['id'] ?>)'>
-                ✏️
-            </button>
-            <button 
-                class='save_button' 
-                data-task-id='<?= $row['id'] ?>' 
-                name='delete' style='display: none' 
-                onclick='saveEdit(<?= $row['id'] ?>)'>
-                Save
-            </button>
+            </td>
+
+            <!-- Buttons: Delete, Edit and Save Edit -->
+            <td class="actions">
+                <form action='delete.php' method='POST'>
+                    <input
+                        type='hidden'
+                        name='task_id'
+                        value='<?= $row['id'] ?>'>
+                    <button
+                        class='del_button'
+                        name='delete'
+                        type='submit'>
+                        &#10060; <!-- Delete button -->
+                    </button>
+                </form>
+
+                    <button
+                        class='edit_button'
+                        data-task-id='<?= $row['id'] ?>'
+                        name='delete'
+                        onclick='enableEdit(<?= $row['id'] ?>)'>
+                        &#x270F;&#xFE0F; <!-- Edit button -->
+                    </button>
+                    <button
+                        class='save_button'
+                        data-task-id='<?= $row['id'] ?>'
+                        name='delete' style='display: none'
+                        onclick='saveEdit(<?= $row['id'] ?>)'>
+                        &#128190; <!-- Save Button -->
+                    </button>
+
+            </td>
+        </tr>
     </div>
-</div>
+</tbody>

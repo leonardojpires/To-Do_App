@@ -1,0 +1,276 @@
+.completed {
+    text-decoration: line-through;
+    color:rgba(0, 0, 0, 0.77);
+}
+
+.unchecked {
+    animation: uncheckBounce 0.3s ease-in-out forwards;
+}
+
+/* --------------------- */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: honeydew;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #000;
+    margin: 0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.51);
+}
+
+header h1 {
+    color: honeydew;
+    margin: 0;
+    text-align: center;
+}
+
+header p {
+    color: honeydew;
+    text-align: center;
+    text-decoration: underline;
+}
+
+main {
+    background-color: honeydew;
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+/* Add Tasks Section */
+
+main .add_task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main .add_task form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+main .add_task label {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+main .add_task input[type="text"] {
+    padding: 15px;
+    border: none;
+    background-color: #c5e6fc5c;
+    border-bottom: 2px solid #0000005c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+main .add_task input[type="text"]:focus {
+    outline: none;
+}
+
+main .add_task .is_completed_input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checkbox itself */
+main .add_task .is_completed_input .task_class {
+    display: none;
+}
+
+/* Checkbox label */
+main .add_task .is_completed_input .task_class_label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+    gap: 8px;
+}
+
+/* Initial checkbox (from label) */
+main .add_task .is_completed_input .task_class_label::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    display: inline-block;
+    background-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Checking initial checkbox */
+main .add_task .is_completed_input .task_class:checked + .task_class_label::after {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    content: '✔';
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    animation: checkBounce 0.3s ease-in-out forwards;
+}
+
+main .add_task input[type="submit"] {
+    color: green;
+    font-size: 2rem;
+    background-color: #c5e6fc5c;
+    
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #0000005c;
+
+    cursor: pointer;
+}
+
+main .add_task input[type="submit"]:hover {
+    background-color: rgba(118, 156, 182, 0.416);
+    transition: 0.3s;
+}
+
+main .add_task input[type="submit"]:not(:hover) {
+    transition: 0.3s;
+}
+
+/* Tasks Section */
+
+main .tasks h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main .tasks table {
+    width: 100%;
+    background-color: rgba(64, 233, 255, 0.434);
+    padding: 10px;
+
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+main .tasks td {
+    text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+main .tasks td .is_completed_input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .tasks td.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+main .tasks .edit_input {
+    padding: 5px;
+    border: none;
+    background-color: #c5e6fc5c;
+    border-bottom: 2px solid #0000005c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* margin-bottom: 10px; */
+}
+
+main .tasks .task_class {
+    display: none;
+}
+
+main .tasks .task_name_class {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+    gap: 8px;
+}
+
+main .tasks .task_name_class::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    display: inline-block;
+    background-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+main .tasks .task_class:checked + .task_name_class::after {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    content: '✔';
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    animation: checkBounce 0.3s ease-in-out forwards;
+}
+
+main .tasks .del_button, 
+main .tasks .edit_button,
+main .tasks .save_button {
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid #0000005c;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+/* Animations */
+
+@keyframes checkBounce {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }       
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* @keyframes uncheckBounce {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+} */
