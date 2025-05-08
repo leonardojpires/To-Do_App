@@ -23,7 +23,7 @@ include 'includes/db.php'; // Include database connection
     <main class="container">
         <section class="add_task">
             <h2>Insert your tasks</h2>
-            <form method="POST" action="add.php">
+            <form id="task_form">
                 <label for="task_name">Task name</label>
                 <input type="text" name="task_name" id="itask_name" placeholder="Insert your task name" required>
                 <div class="is_completed_input">
@@ -41,12 +41,6 @@ include 'includes/db.php'; // Include database connection
         $result = $conn->query(query: "SELECT * FROM tasks ORDER BY created_at DESC");
         if ($result->num_rows > 0): ?>
             <table>
-                <thead>
-                    <th>Task</th>
-                    <th>Created at</th>
-                    <th>Is completed?</th>
-                    <th>Actions</th>
-                </thead>
                 <tbody>
                     <?php 
                         include 'includes/tasks.php';
@@ -54,7 +48,13 @@ include 'includes/db.php'; // Include database connection
                 </tbody>
             </table>
         <?php else: ?>
-            <p>No tasks found</p>
+            <table>
+                <tbody>
+                    <tr id="no-tasks-row">
+                        <td>No tasks found</td>
+                    </tr>
+                </tbody>
+            </table>
         <?php endif; ?>
         </section>
     </main>
