@@ -1,6 +1,6 @@
 function enableEdit(taskId) {
     // Hide the task name and show the input field
-    document.querySelector("[data-task-name='" + taskId + "']").style.display = "none";
+    document.querySelector("[data-task-name='" + taskId + "']").style.setProperty("display", "none", "important");
     document.getElementById("task_edit-" + taskId).style.display = "inline-block";
 
     // Show the Save button and hide the Edit button
